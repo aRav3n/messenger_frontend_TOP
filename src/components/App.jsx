@@ -11,6 +11,8 @@ export default function App() {
   const { loginInfo, setLoginInfo } = useContext(LoginContext);
   const navigate = useNavigate();
 
+  // icon from https://feathericons.com
+
   useEffect(() => {
     if (!loginInfo.token) {
       getStoredUser(setLoginInfo);
