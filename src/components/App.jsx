@@ -5,10 +5,7 @@ import { getStoredUser } from "../functions/localStorage";
 import "../styles/App.css";
 import Footer from "./Footer";
 import Header from "./Header";
-
-function MainBody({ loginInfo }) {
-  return <Outlet />;
-}
+import MainBody from "./MainBody";
 
 export default function App() {
   const { loginInfo, setLoginInfo } = useContext(LoginContext);
@@ -28,7 +25,8 @@ export default function App() {
 
   return (
     <>
-      <Header />
+      <Header loginInfo={loginInfo} setLoginInfo={setLoginInfo} />
+      <Outlet />
       <MainBody loginInfo={loginInfo} />
       <Footer />
     </>

@@ -1,0 +1,134 @@
+:root {
+  --dark: #386468;
+  --light: #defcff;
+}
+
+a {
+  text-decoration: underline;
+}
+
+body {
+  align-items: stretch;
+  display: grid;
+  justify-items: stretch;
+}
+
+button {
+  display: grid;
+  padding: 1vmin 2vmin;
+  place-items: center;
+}
+
+.errorMessage {
+  background-color: #ff7e7e;
+  border-radius: 1vmin;
+  font-weight: bold;
+  margin: 2vh 0;
+  padding: 1vh 2vw;
+}
+
+footer,
+header {
+  align-items: center;
+  background-color: var(--dark);
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  padding: 0.5vh 2vw;
+}
+
+form {
+  display: grid;
+  gap: 2vh;
+  gap: 2dvh;
+  justify-items: center;
+}
+
+header {
+  justify-content: space-between;
+  position: relative;
+  z-index: auto;
+}
+
+label {
+  border-radius: 0.5vmin;
+  display: grid;
+  padding: 0.5vmin;
+}
+
+input:required + span::after {
+  color: #ff0000;
+  content: "*";
+}
+
+main {
+  display: grid;
+  gap: 1vh;
+  justify-items: center;
+  padding: 1vh 1vw;
+}
+
+#root {
+  align-content: space-between;
+  display: grid;
+  margin: 0 uto;
+  padding: 0;
+  text-align: center;
+}
+
+#settingsMenu {
+  background-color: var(--light);
+  border: 1px solid var(--dark);
+  bottom: 0;
+  color: var(--dark);
+  display: grid;
+  gap: 0.5vh;
+  justify-items: stretch;
+  margin-right: 2vw;
+  padding: 1vh 1vw;
+  position: absolute;
+  right: 0;
+  top: auto;
+  transition:
+    top 3s ease-in-out,
+    visibility 3s ease-in-out;
+  visibility: hidden;
+  width: min(50vw, 300px);
+  z-index: -1;
+}
+
+#settingsMenu.hidden {
+  bottom: 0;
+  top: auto;
+  visibility: hidden;
+}
+
+#settingsMenu.visible {
+  bottom: auto;
+  top: 100%;
+  visibility: visible;
+}
+
+#settingsMenu button {
+  background-color: #ffffff00;
+  border-bottom: 1px solid var(--dark);
+  border-radius: 0;
+}
+
+#settingsMenu button:last-child {
+  border-bottom: 1px solid #ffffff00;
+}
+
+#settingsMenu button:hover {
+  background-color: var(--dark);
+  color: var(--light);
+}
+
+#settingsMenu li,
+#settingsMenu ul {
+  display: grid;
+  list-style-type: none;
+  justify-items: stretch;
+  margin: 0;
+  padding: 0;
+}
