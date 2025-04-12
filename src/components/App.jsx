@@ -16,7 +16,7 @@ export default function App() {
 
   useEffect(() => {
     if (!loginInfo.token) {
-      // getStoredUser(setLoginInfo);
+      getStoredUser(setLoginInfo);
     }
   }, []);
 
