@@ -20,6 +20,29 @@ button {
   place-items: center;
 }
 
+button.listDisplay {
+  box-sizing: border-box;
+  display: flex;
+  border: none;
+  border-bottom: 1px solid var(--dark);
+  border-radius: 0;
+  gap: 0.5rem;
+  justify-self: stretch;
+}
+
+button.listDisplay:hover img {
+  border: none;
+  filter: invert(100%);
+}
+
+div.list {
+  align-content: start;
+  border-left: 0.5rem solid var(--dark);
+  border-right: 0.5rem solid var(--dark);
+  display: grid;
+  justify-content: stretch;
+}
+
 .errorMessage {
   background-color: #ff7e7e;
   border-radius: 1vmin;
@@ -72,6 +95,7 @@ main {
   opacity: 80%;
   padding: 1vh 1vw;
   position: relative;
+  z-index: auto;
 }
 
 main.flex {
@@ -96,6 +120,12 @@ main > div {
   display: grid;
   flex-grow: 1;
   justify-items: center;
+  z-index: auto;
+}
+
+nav {
+  align-content: start;
+  display: grid;
 }
 
 #root {
@@ -162,9 +192,11 @@ main > div {
   color: var(--dark);
   height: 100%;
   left: 0;
+  max-width: 100vw;
   min-width: 200px;
   position: absolute;
   top: 0;
+  width: max-content;
 }
 
 #sidebarMenuButton {
@@ -172,4 +204,5 @@ main > div {
   padding: 0.25rem 0.5rem;
   position: absolute;
   top: min(1vh, 1rem);
+  z-index: 1;
 }

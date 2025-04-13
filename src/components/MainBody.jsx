@@ -57,7 +57,13 @@ export default function MainBody({ loginInfo }) {
       ) : (
         <SidebarButton setDisplaySidebar={setDisplaySidebar} />
       )}
-      <div>
+      <div
+        onClick={() => {
+          !alwaysShowSidebar && displaySidebar
+            ? setDisplaySidebar(false)
+            : null;
+        }}
+      >
         <h1>main body</h1>
       </div>
     </main>

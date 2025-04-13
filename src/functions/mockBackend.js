@@ -7,8 +7,3 @@ export const users = [
   },
 ];
 
-export const friends = [
-  {
-    name: "user 2",
-  },
-];
