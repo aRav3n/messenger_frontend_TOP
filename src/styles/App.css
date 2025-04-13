@@ -39,6 +39,7 @@ header {
 }
 
 form {
+  align-content: start;
   display: grid;
   gap: 2vh;
   gap: 2dvh;

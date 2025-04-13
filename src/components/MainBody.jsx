@@ -50,6 +50,7 @@ export default function MainBody({ loginInfo }) {
     <main className="flex">
       {displaySidebar ? (
         <SidebarMenu
+          loginInfo={loginInfo}
           alwaysShowSidebar={alwaysShowSidebar}
           setDisplaySidebar={setDisplaySidebar}
         />

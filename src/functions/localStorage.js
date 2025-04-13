@@ -1,29 +1,24 @@
 function getStoredUser(setLoginInfo) {
-  let nameJson = localStorage.getItem("name");
-  let tokenJson = localStorage.getItem("token");
+  const infoJson = localStorage.getItem("loginInfo")
+    ? localStorage.getItem("loginInfo")
+    : null;
 
-  if (nameJson === "undefined") nameJson = null;
-  if (tokenJson === "undefined") tokenJson = null;
-
-  if (nameJson && tokenJson) {
-    const name = JSON.parse(nameJson);
-    const token = tokenJson;
-    setLoginInfo({ name, token });
+  if (infoJson) {
+    const userObject = JSON.parse(infoJson);
+    setLoginInfo(userObject);
     return true;
   }
   return false;
 }
 
 function logUserIn(userObject, setLoginInfo) {
-  localStorage.setItem("token", userObject.token);
-  localStorage.setItem("name", JSON.stringify(userObject.name));
+  localStorage.setItem("loginInfo", JSON.stringify(userObject));
   setLoginInfo(userObject);
   return;
 }
 
 function logUserOut(setLoginInfo) {
-  localStorage.removeItem("token");
-  localStorage.removeItem("name");
+  localStorage.removeItem("loginInfo");
   setLoginInfo({});
   return;
 }

@@ -1,5 +1,5 @@
 const apiUrl = import.meta.env.VITE_API_ADDRESS;
-import { users } from "./mockBackend";
+import { friends, users } from "./mockBackend";
 
 async function getJsonResponse(urlExtension, method, bodyObject, token) {
   const apiUrl =
@@ -39,10 +39,19 @@ async function getJsonResponse(urlExtension, method, bodyObject, token) {
   }
 }
 
+async function getFriendsList(id, token) {
+  const urlExtension = `/user/${id}/friends`;
+  const method = "POST";
+  const bodyObject = {};
+
+  const friendsList = friends;
+  return friendsList;
+}
+
 async function getUserObject(name, password) {
   const bodyObject = { name, password };
   const method = "POST";
-  const urlExtension = "/login";
+  const urlExtension = "/user/login";
 
   let userObject = null;
   for (let i = 0; i < users.length; i++) {
@@ -69,11 +78,11 @@ async function signUp(name, password, confirmPassword) {
   }
   const bodyObject = { name, password, confirmPassword };
   const method = "POST";
-  const urlExtension = "/signup";
+  const urlExtension = "/user/signup";
 
   users.push({ name, password, token: "fakeToken" });
 
   return { name, password };
 }
 
-export { getUserObject, signUp };
+export { getFriendsList, getUserObject, signUp };
