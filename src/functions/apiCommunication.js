@@ -1,11 +1,7 @@
-const apiUrl = import.meta.env.VITE_API_ADDRESS;
 import { users } from "./mockBackend";
 
 async function getJsonResponse(urlExtension, method, bodyObject, token) {
-  const apiUrl =
-    import.meta.env.VITE_NODE_ENV === "development"
-      ? import.meta.env.VITE_DEV_API_URL
-      : import.meta.env.VITE_PROD_API_URL;
+  const apiUrl = "http://localhost:3000";
 
   const url = `${apiUrl}${urlExtension}`;
   const fetchObject = {
@@ -39,22 +35,22 @@ async function getJsonResponse(urlExtension, method, bodyObject, token) {
   }
 }
 
-async function addFriend(friendUsername, id, token) {
-  const method = "POST";
-  const urlExtension = `/user/${id}/friends/add`;
-  const bodyObject = { friendId, token };
+// user functions
+async function deleteAccount(userId, name, password, token) {
+  const method = "DELETE";
+  const urlExtension = `/user/${userId}/delete`;
+  const bodyObject = { name, password };
 
-  console.log(`adding friend: ${friendUsername}`);
-  return;
-}
+  const response = await getJsonResponse(
+    urlExtension,
+    method,
+    bodyObject,
+    token
+  );
 
-async function getFriendsList(id, token) {
-  const urlExtension = `/user/${id}/friends`;
-  const method = "POST";
-  const bodyObject = {};
+  console.log(response);
 
-  // const friendsList =
-  return; // friendsList;
+  return true;
 }
 
 async function getUserObject(name, password) {
@@ -62,23 +58,9 @@ async function getUserObject(name, password) {
   const method = "POST";
   const urlExtension = "/user/login";
 
-  let userObject = null;
-  for (let i = 0; i < users.length; i++) {
-    if (
-      users[i].name === bodyObject.name &&
-      users[i].password === bodyObject.password
-    ) {
-      userObject = users[i];
-    }
-  }
+  const token = await getJsonResponse(urlExtension, method, bodyObject);
 
-  if (!userObject) {
-    const error = {
-      message: "No account with this username and password found",
-    };
-    return error;
-  }
-  return userObject;
+  return token;
 }
 
 async function signUp(name, password, confirmPassword) {
@@ -89,9 +71,108 @@ async function signUp(name, password, confirmPassword) {
   const method = "POST";
   const urlExtension = "/user/signup";
 
-  users.push({ name, password, token: "fakeToken" });
+  await getJsonResponse(urlExtension, method, bodyObject);
 
-  return { name, password };
+  return true;
 }
 
-export { addFriend, getFriendsList, getUserObject, signUp };
+// friend functions
+async function addFriend(friendUsername, token) {
+  const method = "POST";
+  const urlExtension = "/friend";
+  const bodyObject = { name: friendUsername };
+
+  const response = await getJsonResponse(
+    urlExtension,
+    method,
+    bodyObject,
+    token
+  );
+
+  console.log(response);
+
+  return true;
+}
+
+async function deleteFriend(friendName, friendId, token) {
+  const method = "DELETE";
+  const urlExtension = `/friend/${friendId}`;
+  const bodyObject = { name: friendName };
+
+  const deletedFriendship = await getJsonResponse(
+    urlExtension,
+    method,
+    bodyObject,
+    token
+  );
+
+  return deletedFriendship;
+}
+
+async function getFriendsList(userId) {
+  const urlExtension = `/friend/${userId}`;
+  const method = "GET";
+  const bodyObject = {};
+
+  const friendList = await getJsonResponse(urlExtension, method, bodyObject);
+
+  return friendList;
+}
+
+// message functions
+async function deleteMessage(token, messageId) {
+  const method = "DELETE";
+  const urlExtension = `/message/${messageId}`;
+  const bodyObject = {};
+
+  await getJsonResponse(urlExtension, method, bodyObject, token);
+
+  return true;
+}
+
+async function getMessages(token, friendId) {
+  const method = "GET";
+  const urlExtension = `/message/friend/${friendId}`;
+  const bodyObject = {};
+
+  const messages = await getJsonResponse(
+    urlExtension,
+    method,
+    bodyObject,
+    token
+  );
+
+  return messages;
+}
+
+async function sendMessage(token, friendId, friendName) {
+  const method = "POST";
+  const urlExtension = `/message/${friendId}`;
+  const bodyObject = { name: friendName };
+
+  const messageObject = await getJsonResponse(
+    urlExtension,
+    method,
+    bodyObject,
+    token
+  );
+
+  return true;
+}
+
+export {
+  // user functions
+  deleteAccount,
+  getUserObject,
+  signUp,
+
+  // friend functions
+  addFriend,
+  getFriendsList,
+  deleteFriend,
+
+  // message functions
+  deleteMessage,
+  getMessages,
+  sendMessage,
+};
