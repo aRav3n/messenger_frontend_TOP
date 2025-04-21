@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { addFriend, getFriendsList } from "../functions/apiCommunication";
+import {
+  addFriend,
+  getFriendsList,
+  getMessages,
+  sendMessage,
+} from "../functions/apiCommunication";
 
 function FriendListDisplay({ displayFriends, friendsList }) {
   if (!displayFriends) {
@@ -33,16 +38,8 @@ function MessageListDisplay({ displayMessages, messageList }) {
 
 async function updateFriendList(id, token, setFriendsList) {
   const friends = await getFriendsList(id, token);
-  if (friends) {
+  if (friends && friends !== 404) {
     setFriendsList(friends);
-  }
-  return;
-}
-
-async function updateMessageList(id, token, setMessageList) {
-  const messages = [];
-  if (messages) {
-    setMessageList(messages);
   }
   return;
 }
@@ -53,16 +50,13 @@ export default function SidebarMenu({
   loginInfo,
 }) {
   const [friendsList, setFriendsList] = useState([]);
-  const [messageList, setMessageList] = useState([]);
   const [displayFriends, setDisplayFriends] = useState(false);
-  const [displayMessages, setDisplayMessages] = useState(false);
   const token = loginInfo.token;
   const id = loginInfo.id;
 
   useEffect(() => {
     (async () => {
       await updateFriendList(id, token, setFriendsList);
-      await updateMessageList(id, token, setMessageList);
     })();
   }, []);
 
@@ -87,21 +81,6 @@ export default function SidebarMenu({
       <FriendListDisplay
         displayFriends={displayFriends}
         friendsList={friendsList}
-      />
-      <button
-        type="button"
-        className="listDisplay"
-        onClick={() => {
-          const newBool = !displayMessages;
-          setDisplayMessages(newBool);
-        }}
-      >
-        <img src="./message-square.svg" alt="show message list" />
-        Messages
-      </button>
-      <MessageListDisplay
-        displayMessages={displayMessages}
-        messageList={messageList}
       />
     </nav>
   );

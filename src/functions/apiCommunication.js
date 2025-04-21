@@ -1,5 +1,3 @@
-import { users } from "./mockBackend";
-
 async function getJsonResponse(urlExtension, method, bodyObject, token) {
   const apiUrl = "http://localhost:3000";
 
@@ -24,14 +22,23 @@ async function getJsonResponse(urlExtension, method, bodyObject, token) {
 
   try {
     const response = await fetch(url, fetchObject);
+    const result = await response.json();
 
     if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
+      return {
+        error: true,
+        status: response.status,
+        data: result,
+      };
     }
-    const result = await response.json();
+
     return result;
   } catch (error) {
-    console.error("error sending data:", error);
+    return {
+      error: true,
+      status: 0,
+      data: { message: "Network error" },
+    };
   }
 }
 
@@ -71,8 +78,16 @@ async function signUp(name, password, confirmPassword) {
   const method = "POST";
   const urlExtension = "/user/signup";
 
-  await getJsonResponse(urlExtension, method, bodyObject);
+  try {
+    const response = await getJsonResponse(urlExtension, method, bodyObject);
+    if (response === 409) {
+      return { message: "User already exists, try logging in instead" };
+    }
+  } catch (error) {
+    console.error(error);
 
+    return { message: error.message || "An unknown error occurred" };
+  }
   return true;
 }
 
@@ -114,9 +129,17 @@ async function getFriendsList(userId) {
   const method = "GET";
   const bodyObject = {};
 
-  const friendList = await getJsonResponse(urlExtension, method, bodyObject);
+  const response = await getJsonResponse(urlExtension, method, bodyObject);
 
-  return friendList;
+  if (response?.error) {
+    if (response.status === 404) {
+      return [];
+    }
+    console.error("Friends list error:", response.status, response.data);
+    return [];
+  }
+
+  return Array.isArray(response) ? response : [];
 }
 
 // message functions
