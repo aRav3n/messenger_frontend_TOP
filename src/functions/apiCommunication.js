@@ -67,6 +67,10 @@ async function getUserObject(name, password) {
 
   const token = await getJsonResponse(urlExtension, method, bodyObject);
 
+  if (token.error) {
+    return token.data;
+  }
+
   return token;
 }
 
@@ -80,7 +84,8 @@ async function signUp(name, password, confirmPassword) {
 
   try {
     const response = await getJsonResponse(urlExtension, method, bodyObject);
-    if (response === 409) {
+    console.log(response);
+    if (response.status === 409) {
       return { message: "User already exists, try logging in instead" };
     }
   } catch (error) {
@@ -134,9 +139,10 @@ async function getFriendsList(userId) {
   if (response?.error) {
     if (response.status === 404) {
       return [];
+    } else {
+      console.error("Friends list error:", response.status, response.data);
+      return [];
     }
-    console.error("Friends list error:", response.status, response.data);
-    return [];
   }
 
   return Array.isArray(response) ? response : [];
