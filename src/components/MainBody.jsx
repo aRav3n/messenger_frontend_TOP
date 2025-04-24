@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
-import SidebarMenu from "./SidebarMenu";
-import NewFriend from "./NewFriend";
-import ErrorMessage from "./ErrorMessage";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "./userInfo";
-import { useContext } from "react";
+import ErrorMessage from "./partials/ErrorMessage";
+import SidebarMenu from "./partials/SidebarMenu";
+import NewFriend from "./NewFriend";
 
 function SidebarButton({ setDisplaySidebar }) {
   return (
@@ -39,10 +38,8 @@ export default function MainBody({ loginInfo }) {
   }
 
   window.addEventListener("resize", checkWindowSize);
-  useEffect(() => {
-    checkWindowSize();
-  }, []);
 
+  // decide whether to show sidebar or now
   useEffect(() => {
     if (!alwaysShowSidebar) {
       setDisplaySidebar(false);
@@ -53,18 +50,22 @@ export default function MainBody({ loginInfo }) {
 
   // Things to be done upon page load
   useEffect(() => {
+    checkWindowSize();
     setError(null);
   }, []);
 
+  // don't display MainBody if there's not a logged in user
   if (!loginInfo.token) {
     return null;
   }
+
   return (
     <main className="flex">
       {displaySidebar ? (
         <SidebarMenu
           loginInfo={loginInfo}
           alwaysShowSidebar={alwaysShowSidebar}
+          setConversationToDisplay={setConversationToDisplay}
           setDisplaySidebar={setDisplaySidebar}
         />
       ) : (
@@ -85,7 +86,7 @@ export default function MainBody({ loginInfo }) {
             setError={setError}
           />
         ) : (
-          <h1>main body</h1>
+          <h1>Home Page</h1>
         )}
       </div>
     </main>

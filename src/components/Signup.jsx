@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signUp } from "../functions/apiCommunication";
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from "./partials/ErrorMessage";
 
 export default function Signup() {
   const navigate = useNavigate();

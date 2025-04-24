@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "./userInfo";
 import { getUserObject } from "../functions/apiCommunication";
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from "./partials/ErrorMessage";
 import { logUserIn } from "../functions/localStorage";
 
 export default function Login() {

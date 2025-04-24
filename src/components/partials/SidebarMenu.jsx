@@ -4,10 +4,15 @@ import {
   getFriendsList,
   getMessages,
   sendMessage,
-} from "../functions/apiCommunication";
-import { Context } from "./userInfo";
+} from "../../functions/apiCommunication";
+import { Context } from "../userInfo";
 
-function FriendListDisplay({ displayFriends, friendsList, setAddingFriend }) {
+function FriendListDisplay({
+  setConversationToDisplay,
+  displayFriends,
+  friendsList,
+  setAddingFriend,
+}) {
   if (!displayFriends) {
     return null;
   }
@@ -52,6 +57,7 @@ async function updateFriendList(id, token, setFriendsList) {
 
 export default function SidebarMenu({
   alwaysShowSidebar,
+  setConversationToDisplay,
   setDisplaySidebar,
   loginInfo,
 }) {
@@ -88,6 +94,7 @@ export default function SidebarMenu({
         Friends
       </button>
       <FriendListDisplay
+        setConversationToDisplay={setConversationToDisplay}
         displayFriends={displayFriends}
         friendsList={friendsList}
         setAddingFriend={setAddingFriend}

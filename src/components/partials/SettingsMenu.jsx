@@ -1,4 +1,4 @@
-import { logUserOut } from "../functions/localStorage";
+import { logUserOut } from "../../functions/localStorage";
 
 export default function SettingsMenu({ setLoginInfo, showMenu, setShowMenu }) {
   return (
