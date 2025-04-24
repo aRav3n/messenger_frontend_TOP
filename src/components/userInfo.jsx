@@ -1,18 +1,16 @@
 import { useState, createContext } from "react";
 
-export const LoginContext = createContext();
+export const Context = createContext();
 
-export const LoginProvider = ({ children }) => {
-  const initialLoginInfo = {
-    name: null,
-    token: null,
-  };
-
-  const [loginInfo, setLoginInfo] = useState(initialLoginInfo);
+export const ContextProvider = ({ children }) => {
+  const [loginInfo, setLoginInfo] = useState({});
+  const [addingFriend, setAddingFriend] = useState(false);
 
   return (
-    <LoginContext.Provider value={{ loginInfo, setLoginInfo }}>
+    <Context.Provider
+      value={{ addingFriend, setAddingFriend, loginInfo, setLoginInfo }}
+    >
       {children}
-    </LoginContext.Provider>
+    </Context.Provider>
   );
 };

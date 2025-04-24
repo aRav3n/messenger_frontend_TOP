@@ -65,35 +65,27 @@ async function getUserObject(name, password) {
   const method = "POST";
   const urlExtension = "/user/login";
 
-  const token = await getJsonResponse(urlExtension, method, bodyObject);
+  const response = await getJsonResponse(urlExtension, method, bodyObject);
 
-  if (token.error) {
-    return token.data;
+  if (response.error) {
+    return response.data;
   }
 
-  return token;
+  return response;
 }
 
 async function signUp(name, password, confirmPassword) {
-  if (password !== confirmPassword) {
-    return { message: "Your passwords must match" };
-  }
   const bodyObject = { name, password, confirmPassword };
   const method = "POST";
   const urlExtension = "/user/signup";
 
-  try {
-    const response = await getJsonResponse(urlExtension, method, bodyObject);
-    console.log(response);
-    if (response.status === 409) {
-      return { message: "User already exists, try logging in instead" };
-    }
-  } catch (error) {
-    console.error(error);
+  const response = await getJsonResponse(urlExtension, method, bodyObject);
 
-    return { message: error.message || "An unknown error occurred" };
+  if (response.error) {
+    return response.data;
   }
-  return true;
+
+  return response;
 }
 
 // friend functions
@@ -136,13 +128,8 @@ async function getFriendsList(userId) {
 
   const response = await getJsonResponse(urlExtension, method, bodyObject);
 
-  if (response?.error) {
-    if (response.status === 404) {
-      return [];
-    } else {
-      console.error("Friends list error:", response.status, response.data);
-      return [];
-    }
+  if (response.error) {
+    return response.data;
   }
 
   return Array.isArray(response) ? response : [];

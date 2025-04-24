@@ -1,14 +1,16 @@
 import { useContext, useEffect, useState } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { LoginContext } from "./userInfo";
+import { Outlet, useNavigate } from "react-router-dom";
+import { Context } from "./userInfo";
 import { getStoredUser } from "../functions/localStorage";
 import "../styles/App.css";
 import Footer from "./Footer";
 import Header from "./Header";
 import MainBody from "./MainBody";
+import NewFriend from "./NewFriend";
 
 export default function App() {
-  const { loginInfo, setLoginInfo } = useContext(LoginContext);
+  const { addingFriend, setAddingFriend } = useContext(Context);
+  const { loginInfo, setLoginInfo } = useContext(Context);
   const navigate = useNavigate();
 
   // icon from https://feathericons.com
@@ -29,7 +31,7 @@ export default function App() {
     <>
       <Header loginInfo={loginInfo} setLoginInfo={setLoginInfo} />
       <Outlet />
-      <MainBody loginInfo={loginInfo} />
+      {addingFriend ? <NewFriend /> : <MainBody loginInfo={loginInfo} />}
       <Footer />
     </>
   );

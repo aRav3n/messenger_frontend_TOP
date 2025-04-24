@@ -1,14 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { LoginContext } from "./userInfo";
 import { signUp } from "../functions/apiCommunication";
 import ErrorMessage from "./ErrorMessage";
 
 export default function Signup() {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState("user");
+  const [password, setPassword] = useState("123456");
+  const [confirmPassword, setConfirmPassword] = useState("123456");
   const [outlineStyling, setOutlineStyling] = useState({});
   const [error, setError] = useState(null);
 

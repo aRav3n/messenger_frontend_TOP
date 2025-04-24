@@ -1,37 +1,29 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   addFriend,
   getFriendsList,
   getMessages,
   sendMessage,
 } from "../functions/apiCommunication";
+import { Context } from "./userInfo";
 
-function FriendListDisplay({ displayFriends, friendsList }) {
+function FriendListDisplay({ displayFriends, friendsList, setAddingFriend }) {
   if (!displayFriends) {
     return null;
   }
   return (
     <div className="list">
-      <button type="button" className="listDisplay">
+      <button
+        type="button"
+        className="listDisplay"
+        onClick={() => {
+          setAddingFriend(true);
+        }}
+      >
         <img src="./user-plus.svg" alt="" />
         Add Friend
       </button>
       {friendsList.map((friend) => {})}
-    </div>
-  );
-}
-
-function MessageListDisplay({ displayMessages, messageList }) {
-  if (!displayMessages) {
-    return null;
-  }
-  return (
-    <div className="list">
-      <button type="button" className="listDisplay">
-        <img src="./plus-square.svg" alt="" />
-        New Message
-      </button>
-      {messageList.map((message) => {})}
     </div>
   );
 }
@@ -49,6 +41,7 @@ export default function SidebarMenu({
   setDisplaySidebar,
   loginInfo,
 }) {
+  const { addingFriend, setAddingFriend } = useContext(Context);
   const [friendsList, setFriendsList] = useState([]);
   const [displayFriends, setDisplayFriends] = useState(false);
   const token = loginInfo.token;
@@ -81,6 +74,7 @@ export default function SidebarMenu({
       <FriendListDisplay
         displayFriends={displayFriends}
         friendsList={friendsList}
+        setAddingFriend={setAddingFriend}
       />
     </nav>
   );

@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { LoginContext } from "./userInfo";
+import { Context } from "./userInfo";
 import { getUserObject } from "../functions/apiCommunication";
 import ErrorMessage from "./ErrorMessage";
 import { logUserIn } from "../functions/localStorage";
 
 export default function Login() {
   const navigate = useNavigate();
-  const { loginInfo, setLoginInfo } = useContext(LoginContext);
+  const { loginInfo, setLoginInfo } = useContext(Context);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
