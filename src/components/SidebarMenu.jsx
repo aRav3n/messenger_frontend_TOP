@@ -48,10 +48,12 @@ export default function SidebarMenu({
   const id = loginInfo.id;
 
   useEffect(() => {
-    (async () => {
-      await updateFriendList(id, token, setFriendsList);
-    })();
-  }, []);
+    if (!addingFriend) {
+      (async () => {
+        await updateFriendList(id, token, setFriendsList);
+      })();
+    }
+  }, [addingFriend]);
 
   return (
     <nav

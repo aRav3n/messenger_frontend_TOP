@@ -101,9 +101,7 @@ async function addFriend(friendUsername, token) {
     token
   );
 
-  console.log(response);
-
-  return true;
+  return response;
 }
 
 async function deleteFriend(friendName, friendId, token) {

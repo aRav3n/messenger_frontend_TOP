@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import SidebarMenu from "./SidebarMenu";
+import NewFriend from "./NewFriend";
+import ErrorMessage from "./ErrorMessage";
+import { Context } from "./userInfo";
+import { useContext } from "react";
 
 function SidebarButton({ setDisplaySidebar }) {
   return (
@@ -16,8 +20,11 @@ function SidebarButton({ setDisplaySidebar }) {
 }
 
 export default function MainBody({ loginInfo }) {
-  const [displaySidebar, setDisplaySidebar] = useState(false);
+  const { addingFriend, setAddingFriend } = useContext(Context);
   const [alwaysShowSidebar, setAlwaysShowSidebar] = useState(false);
+  const [displaySidebar, setDisplaySidebar] = useState(false);
+  const [error, setError] = useState(null);
+  const [manuallyAddedFriends, setManuallyAddedFriends] = useState([]);
 
   function checkWindowSize() {
     const width = window.innerWidth;
@@ -64,7 +71,16 @@ export default function MainBody({ loginInfo }) {
             : null;
         }}
       >
-        <h1>main body</h1>
+        <ErrorMessage error={error} />
+        {addingFriend ? (
+          <NewFriend
+            addingFriend={addingFriend}
+            setAddingFriend={setAddingFriend}
+            setError={setError}
+          />
+        ) : (
+          <h1>main body</h1>
+        )}
       </div>
     </main>
   );

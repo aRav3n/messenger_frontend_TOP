@@ -1,13 +1,25 @@
 import { useState } from "react";
 import { getStoredToken } from "../functions/localStorage";
-import ErrorMessage from "./ErrorMessage";
+import { addFriend } from "../functions/apiCommunication";
 
-export default function NewFriend() {
+export default function NewFriend({ addingFriend, setAddingFriend, setError }) {
   const [friendName, setFriendName] = useState("");
   const token = getStoredToken();
 
+  function handleClick() {
+    (async () => {
+      const friendship = await addFriend(friendName, token);
+      if (friendship.id) {
+        setAddingFriend(false);
+      } else {
+        setError(friendship);
+      }
+      setFriendName("");
+    })();
+  }
+
   return (
-    <main className="addFriend">
+    <>
       <h1>Add a new friend!</h1>
       <form action="">
         <label htmlFor="name">
@@ -23,7 +35,10 @@ export default function NewFriend() {
           />
           <span>Friend's Username</span>
         </label>
+        <button type="button" onClick={handleClick}>
+          Add Friend!
+        </button>
       </form>
-    </main>
+    </>
   );
 }

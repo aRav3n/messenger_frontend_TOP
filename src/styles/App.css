@@ -44,6 +44,7 @@ div.list {
 }
 
 .errorMessage {
+  align-self: start;
   background-color: #ff7e7e;
   border-radius: 1vmin;
   font-weight: bold;

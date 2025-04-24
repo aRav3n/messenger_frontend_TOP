@@ -6,10 +6,8 @@ import "../styles/App.css";
 import Footer from "./Footer";
 import Header from "./Header";
 import MainBody from "./MainBody";
-import NewFriend from "./NewFriend";
 
 export default function App() {
-  const { addingFriend, setAddingFriend } = useContext(Context);
   const { loginInfo, setLoginInfo } = useContext(Context);
   const navigate = useNavigate();
 
@@ -31,7 +29,9 @@ export default function App() {
     <>
       <Header loginInfo={loginInfo} setLoginInfo={setLoginInfo} />
       <Outlet />
-      {addingFriend ? <NewFriend /> : <MainBody loginInfo={loginInfo} />}
+      <MainBody
+        loginInfo={loginInfo}
+      />
       <Footer />
     </>
   );
