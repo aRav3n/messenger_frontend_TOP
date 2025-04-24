@@ -23,7 +23,21 @@ function FriendListDisplay({ displayFriends, friendsList, setAddingFriend }) {
         <img src="./user-plus.svg" alt="" />
         Add Friend
       </button>
-      {friendsList.map((friend) => {})}
+      {friendsList.map((friend) => {
+        return (
+          <button
+            key={friend}
+            type="button"
+            className="listDisplay"
+            onClick={() => {
+              // setDisplayFriends(newBool);
+            }}
+          >
+            <img src="./user.svg" alt={`show conversation with ${friend}`} />
+            {friend}
+          </button>
+        );
+      })}
     </div>
   );
 }

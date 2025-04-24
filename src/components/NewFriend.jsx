@@ -9,6 +9,7 @@ export default function NewFriend({ addingFriend, setAddingFriend, setError }) {
   function handleClick() {
     (async () => {
       const friendship = await addFriend(friendName, token);
+      console.log(friendship);
       if (friendship.id) {
         setAddingFriend(false);
       } else {

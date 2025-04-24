@@ -22,6 +22,7 @@ function SidebarButton({ setDisplaySidebar }) {
 export default function MainBody({ loginInfo }) {
   const { addingFriend, setAddingFriend } = useContext(Context);
   const [alwaysShowSidebar, setAlwaysShowSidebar] = useState(false);
+  const [conversationToDisplay, setConversationToDisplay] = useState(null);
   const [displaySidebar, setDisplaySidebar] = useState(false);
   const [error, setError] = useState(null);
   const [manuallyAddedFriends, setManuallyAddedFriends] = useState([]);
@@ -49,6 +50,11 @@ export default function MainBody({ loginInfo }) {
       setDisplaySidebar(true);
     }
   }, [alwaysShowSidebar]);
+
+  // Things to be done upon page load
+  useEffect(() => {
+    setError(null);
+  }, []);
 
   if (!loginInfo.token) {
     return null;
