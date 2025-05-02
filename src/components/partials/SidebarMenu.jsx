@@ -13,6 +13,7 @@ function FriendListDisplay({
   friendsList,
   setAddingFriend,
 }) {
+  const { loginInfo, setLoginInfo } = useContext(Context);
   if (!displayFriends) {
     return null;
   }
@@ -35,7 +36,13 @@ function FriendListDisplay({
             type="button"
             className="listDisplay"
             onClick={() => {
-              setConversationToDisplay(friend.id);
+              (async () => {
+                const conversation = await getMessages(
+                  loginInfo.token,
+                  friend.id
+                );
+                setConversationToDisplay(conversation);
+              })();
             }}
           >
             <img
