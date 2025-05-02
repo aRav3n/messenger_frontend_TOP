@@ -1,6 +1,8 @@
 :root {
   --dark: #386468;
+  --dark-gray: #6b6b6b;
   --light: #defcff;
+  --light-gray: #ededed;
 }
 
 a {
@@ -42,7 +44,32 @@ div.conversation {
 }
 
 div.conversation > div {
+  align-content: start;
+  align-items: start;
+  align-self: center;
+  display: grid;
   flex-grow: 1;
+  gap: 1vh;
+  padding: 1vh 1vw;
+  width: min(95vw, 600px);
+}
+
+div.conversation > div > div {
+  border-radius: 0.75rem;
+  box-sizing: border-box;
+  color: var(--dark);
+  min-height: 1rem;
+  padding: 0.5rem;
+}
+
+div.conversation > div > div.sent {
+  background-color: var(--light);
+  justify-self: end;
+}
+
+div.conversation > div > div.received {
+  background-color: var(--light-gray);
+  justify-self: start;
 }
 
 div.conversation > form {

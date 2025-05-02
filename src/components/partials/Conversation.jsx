@@ -7,6 +7,8 @@ export default function Conversation({ conversationToDisplay }) {
   const [message, setMessage] = useState("");
   const [conversation, setConversation] = useState([]);
 
+  const userId = loginInfo.id;
+
   useEffect(() => {
     console.log(conversation);
   }, [conversation]);
@@ -26,7 +28,16 @@ export default function Conversation({ conversationToDisplay }) {
 
   return (
     <div className="conversation">
-      <div>conversation</div>
+      <div>
+        {conversation.map((message) => {
+          const className = message.senderId === userId ? "sent" : "received";
+          return (
+            <div key={message.id} className={className}>
+              {message.messageBody}
+            </div>
+          );
+        })}
+      </div>
       <form action="">
         <label htmlFor="message">
           <input
