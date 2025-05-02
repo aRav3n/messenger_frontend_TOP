@@ -3,6 +3,7 @@ import { Context } from "./userInfo";
 import ErrorMessage from "./partials/ErrorMessage";
 import SidebarMenu from "./partials/SidebarMenu";
 import NewFriend from "./NewFriend";
+import Conversation from "./partials/Conversation";
 
 function SidebarButton({ setDisplaySidebar }) {
   return (
@@ -54,12 +55,6 @@ export default function MainBody({ loginInfo }) {
     setError(null);
   }, []);
 
-  useEffect(() => {
-    if (conversationToDisplay) {
-      console.log(conversationToDisplay);
-    }
-  }, [conversationToDisplay]);
-
   // don't display MainBody if there's not a logged in user
   if (!loginInfo.token) {
     return null;
@@ -91,6 +86,8 @@ export default function MainBody({ loginInfo }) {
             setAddingFriend={setAddingFriend}
             setError={setError}
           />
+        ) : conversationToDisplay ? (
+          <Conversation conversationToDisplay={conversationToDisplay} />
         ) : (
           <h1>Home Page</h1>
         )}

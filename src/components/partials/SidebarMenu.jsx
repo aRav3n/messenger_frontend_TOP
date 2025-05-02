@@ -42,6 +42,7 @@ function FriendListDisplay({
                   friend.id
                 );
                 setConversationToDisplay(conversation);
+                setAddingFriend(false);
               })();
             }}
           >
