@@ -54,6 +54,12 @@ export default function MainBody({ loginInfo }) {
     setError(null);
   }, []);
 
+  useEffect(() => {
+    if (conversationToDisplay) {
+      console.log(conversationToDisplay);
+    }
+  }, [conversationToDisplay]);
+
   // don't display MainBody if there's not a logged in user
   if (!loginInfo.token) {
     return null;

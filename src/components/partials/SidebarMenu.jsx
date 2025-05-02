@@ -35,11 +35,14 @@ function FriendListDisplay({
             type="button"
             className="listDisplay"
             onClick={() => {
-              // setDisplayFriends(newBool);
+              setConversationToDisplay(friend.id);
             }}
           >
-            <img src="./user.svg" alt={`show conversation with ${friend}`} />
-            {friend}
+            <img
+              src="./user.svg"
+              alt={`show conversation with ${friend.name}`}
+            />
+            {friend.name}
           </button>
         );
       })}
