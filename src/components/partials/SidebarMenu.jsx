@@ -36,14 +36,8 @@ function FriendListDisplay({
             type="button"
             className="listDisplay"
             onClick={() => {
-              (async () => {
-                const conversation = await getMessages(
-                  loginInfo.token,
-                  friend.id
-                );
-                setConversationToDisplay(conversation);
-                setAddingFriend(false);
-              })();
+              setConversationToDisplay(friend);
+              setAddingFriend(false);
             }}
           >
             <img

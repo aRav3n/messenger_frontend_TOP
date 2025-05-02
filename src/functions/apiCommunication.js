@@ -159,10 +159,10 @@ async function getMessages(token, friendId) {
   return messages;
 }
 
-async function sendMessage(token, friendId, friendName) {
+async function sendMessage(token, friendId, friendName, message) {
   const method = "POST";
   const urlExtension = `/message/${friendId}`;
-  const bodyObject = { name: friendName };
+  const bodyObject = { to: friendName, message };
 
   const messageObject = await getJsonResponse(
     urlExtension,

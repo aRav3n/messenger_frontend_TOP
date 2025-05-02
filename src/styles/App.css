@@ -35,6 +35,29 @@ button.listDisplay:hover img {
   filter: invert(100%);
 }
 
+div.conversation {
+  align-content: stretch;
+  display: flex;
+  flex-direction: column;
+}
+
+div.conversation > div {
+  flex-grow: 1;
+}
+
+div.conversation > form {
+  border-top: 1px solid var(--dark);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1vmin;
+}
+
+div.conversation > form > label {
+  flex-grow: 1;
+  max-width: 500px;
+}
+
 div.list {
   align-content: start;
   border-left: 0.5rem solid var(--dark);
@@ -91,7 +114,6 @@ main {
   align-self: stretch;
   display: grid;
   flex-grow: 1;
-  gap: 1vh;
   justify-items: center;
   opacity: 80%;
   padding: 1vh 1vw;
@@ -120,7 +142,8 @@ main button:hover {
 main > div {
   display: grid;
   flex-grow: 1;
-  justify-items: center;
+  justify-content: stretch;
+  justify-items: stretch;
   z-index: auto;
 }
 
