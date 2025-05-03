@@ -51,7 +51,7 @@ div.conversation > div {
   flex-grow: 1;
   gap: 1vh;
   padding: 1vh 1vw;
-  width: min(95vw, 600px);
+  width: min(95%, 600px);
 }
 
 div.conversation > div > div {
@@ -141,6 +141,7 @@ main {
   align-self: stretch;
   display: grid;
   flex-grow: 1;
+  flex-shrink: 1;
   justify-items: center;
   opacity: 80%;
   padding: 1vh 1vw;
@@ -172,6 +173,7 @@ main > div {
   justify-content: stretch;
   justify-items: stretch;
   z-index: auto;
+  width: 100%;
 }
 
 nav {
@@ -183,9 +185,13 @@ nav {
   align-content: space-between;
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
   margin: 0 uto;
+  min-height: 200px;
   padding: 0;
   text-align: center;
+  width: max(100vw, 200px);
 }
 
 #settingsMenu {
