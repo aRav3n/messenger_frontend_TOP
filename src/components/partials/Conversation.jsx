@@ -29,14 +29,17 @@ export default function Conversation({ conversationToDisplay }) {
   return (
     <div className="conversation">
       <div>
-        {conversation.map((message) => {
-          const className = message.senderId === userId ? "sent" : "received";
-          return (
-            <div key={message.id} className={className}>
-              {message.messageBody}
-            </div>
-          );
-        })}
+        {conversation
+          .slice()
+          .reverse()
+          .map((message) => {
+            const className = message.senderId === userId ? "sent" : "received";
+            return (
+              <div key={message.id} className={className}>
+                {message.messageBody}
+              </div>
+            );
+          })}
       </div>
       <form action="">
         <label htmlFor="message">

@@ -5,6 +5,11 @@
   --light-gray: #ededed;
 }
 
+* {
+  box-sizing: border-box;
+  min-height: 0;
+}
+
 a {
   text-decoration: underline;
 }
@@ -12,6 +17,8 @@ a {
 body {
   align-items: stretch;
   display: grid;
+  height: 100vh;
+  height: 100dvh;
   justify-items: stretch;
   z-index: auto;
 }
@@ -40,16 +47,23 @@ button.listDisplay:hover img {
 div.conversation {
   align-content: stretch;
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
+  height: 100%;
+  min-height: 0;
 }
 
 div.conversation > div {
   align-content: start;
   align-items: start;
   align-self: center;
-  display: grid;
-  flex-grow: 1;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column-reverse;
   gap: 1vh;
+  height: 100%;
+  min-height: 0;
+  overflow: scroll;
   padding: 1vh 1vw;
   width: min(95%, 600px);
 }
@@ -58,18 +72,19 @@ div.conversation > div > div {
   border-radius: 0.75rem;
   box-sizing: border-box;
   color: var(--dark);
+  flex: 0 0 auto;
   min-height: 1rem;
   padding: 0.5rem;
 }
 
 div.conversation > div > div.sent {
   background-color: var(--light);
-  justify-self: end;
+  align-self: end;
 }
 
 div.conversation > div > div.received {
   background-color: var(--light-gray);
-  justify-self: start;
+  align-self: start;
 }
 
 div.conversation > form {
@@ -108,6 +123,7 @@ header {
   background-color: var(--dark);
   color: #ffffff;
   display: flex;
+  flex: 0 0 auto;
   justify-content: center;
   padding: 0.5vh 2vw;
 }
@@ -126,6 +142,11 @@ header {
   z-index: auto;
 }
 
+html {
+  height: 100vh;
+  height: 100dvh;
+}
+
 label {
   border-radius: 0.5vmin;
   display: grid;
@@ -140,8 +161,7 @@ input:required + span::after {
 main {
   align-self: stretch;
   display: grid;
-  flex-grow: 1;
-  flex-shrink: 1;
+  flex: 1 1 auto;
   justify-items: center;
   opacity: 80%;
   padding: 1vh 1vw;
@@ -170,6 +190,7 @@ main button:hover {
 main > div {
   display: grid;
   flex-grow: 1;
+  height: 100%;
   justify-content: stretch;
   justify-items: stretch;
   z-index: auto;
