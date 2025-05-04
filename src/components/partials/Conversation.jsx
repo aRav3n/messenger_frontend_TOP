@@ -21,7 +21,6 @@ export default function Conversation({
 
   useEffect(() => {
     if (message === "") {
-      console.log("updating conversation");
       (async () => {
         const response = await getMessages(
           loginInfo.token,
@@ -36,16 +35,19 @@ export default function Conversation({
     <div className="conversation">
       <div>
         {conversation
-          .slice()
-          .reverse()
-          .map((message) => {
-            const className = message.senderId === userId ? "sent" : "received";
-            return (
-              <div key={message.id} className={className}>
-                {message.messageBody}
-              </div>
-            );
-          })}
+          ? conversation
+              .slice()
+              .reverse()
+              .map((message) => {
+                const className =
+                  message.senderId === userId ? "sent" : "received";
+                return (
+                  <div key={message.id} className={className}>
+                    {message.messageBody}
+                  </div>
+                );
+              })
+          : null}
 
         <Placeholder alwaysShowSidebar={alwaysShowSidebar} />
       </div>
