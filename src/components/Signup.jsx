@@ -5,9 +5,9 @@ import ErrorMessage from "./partials/ErrorMessage";
 
 export default function Signup() {
   const navigate = useNavigate();
-  const [name, setName] = useState("user");
-  const [password, setPassword] = useState("123456");
-  const [confirmPassword, setConfirmPassword] = useState("123456");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [outlineStyling, setOutlineStyling] = useState({});
   const [error, setError] = useState(null);
 

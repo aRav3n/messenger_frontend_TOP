@@ -8,8 +8,8 @@ import { logUserIn } from "../functions/localStorage";
 export default function Login() {
   const navigate = useNavigate();
   const { loginInfo, setLoginInfo } = useContext(Context);
-  const [name, setName] = useState("user");
-  const [password, setPassword] = useState("123456");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
   useEffect(() => {
