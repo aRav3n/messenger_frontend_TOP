@@ -202,6 +202,11 @@ nav {
   display: grid;
 }
 
+.placeholder {
+  flex-shrink: 0;
+  height: 2.15rem;
+}
+
 #root {
   align-content: space-between;
   display: flex;

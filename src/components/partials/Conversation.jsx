@@ -2,16 +2,22 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "../userInfo";
 import { getMessages, sendMessage } from "../../functions/apiCommunication";
 
-export default function Conversation({ conversationToDisplay }) {
+function Placeholder({ alwaysShowSidebar }) {
+  if (alwaysShowSidebar) {
+    return null;
+  }
+  return <div className="placeholder"></div>;
+}
+
+export default function Conversation({
+  conversationToDisplay,
+  alwaysShowSidebar,
+}) {
   const { loginInfo, setLoginInfo } = useContext(Context);
   const [message, setMessage] = useState("");
   const [conversation, setConversation] = useState([]);
 
   const userId = loginInfo.id;
-
-  useEffect(() => {
-    console.log(conversation);
-  }, [conversation]);
 
   useEffect(() => {
     if (message === "") {
@@ -40,6 +46,8 @@ export default function Conversation({ conversationToDisplay }) {
               </div>
             );
           })}
+
+        <Placeholder alwaysShowSidebar={alwaysShowSidebar} />
       </div>
       <form action="">
         <label htmlFor="message">
@@ -57,14 +65,12 @@ export default function Conversation({ conversationToDisplay }) {
           type="button"
           onClick={() => {
             (async () => {
-              console.log("click");
               const response = await sendMessage(
                 loginInfo.token,
                 conversationToDisplay.id,
                 conversationToDisplay.name,
                 message
               );
-              console.log(response);
               setMessage("");
             })();
           }}

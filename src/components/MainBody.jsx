@@ -25,7 +25,6 @@ export default function MainBody({ loginInfo }) {
   const [conversationToDisplay, setConversationToDisplay] = useState(null);
   const [displaySidebar, setDisplaySidebar] = useState(false);
   const [error, setError] = useState(null);
-  const [manuallyAddedFriends, setManuallyAddedFriends] = useState([]);
 
   function checkWindowSize() {
     const width = window.innerWidth;
@@ -87,7 +86,10 @@ export default function MainBody({ loginInfo }) {
             setError={setError}
           />
         ) : conversationToDisplay ? (
-          <Conversation conversationToDisplay={conversationToDisplay} />
+          <Conversation
+            conversationToDisplay={conversationToDisplay}
+            alwaysShowSidebar={alwaysShowSidebar}
+          />
         ) : (
           <h1>Home Page</h1>
         )}

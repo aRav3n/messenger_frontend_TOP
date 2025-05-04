@@ -55,8 +55,6 @@ async function deleteAccount(userId, name, password, token) {
     token
   );
 
-  console.log(response);
-
   return true;
 }
 
