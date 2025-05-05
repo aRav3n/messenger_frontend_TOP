@@ -5,6 +5,19 @@
   --light-gray: #ededed;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --light: #386468;
+    --light-gray: #6b6b6b;
+    --dark: #defcff;
+    --dark-gray: #ededed;
+  }
+
+  img {
+    filter: invert(100%);
+  }
+}
+
 * {
   box-sizing: border-box;
   min-height: 0;
@@ -88,6 +101,8 @@ div.conversation > div > div.received {
 }
 
 div.conversation > form {
+  align-content: center;
+  background-color: var(--light-gray);
   border-top: 1px solid var(--dark);
   display: flex;
   flex-wrap: wrap;
@@ -121,7 +136,7 @@ footer,
 header {
   align-items: center;
   background-color: var(--dark);
-  color: #ffffff;
+  color: var(--light-gray);
   display: flex;
   flex: 0 0 auto;
   justify-content: center;
