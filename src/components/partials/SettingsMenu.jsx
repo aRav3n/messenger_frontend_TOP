@@ -1,6 +1,10 @@
+import { useContext } from "react";
+import { Context } from "../userInfo";
+import { deleteAccount } from "../../functions/apiCommunication";
 import { logUserOut } from "../../functions/localStorage";
 
 export default function SettingsMenu({ setLoginInfo, showMenu, setShowMenu }) {
+  const { setDeletingAccount } = useContext(Context);
   return (
     <nav
       id="settingsMenu"
@@ -18,6 +22,14 @@ export default function SettingsMenu({ setLoginInfo, showMenu, setShowMenu }) {
             }}
           >
             Log out
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setDeletingAccount(true);
+            }}
+          >
+            Delete Account
           </button>
         </li>
       </ul>

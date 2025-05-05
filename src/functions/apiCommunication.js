@@ -55,7 +55,10 @@ async function deleteAccount(userId, name, password, token) {
     token
   );
 
-  return true;
+  if (response.id === userId) {
+    return true;
+  }
+  return false;
 }
 
 async function getUserObject(name, password) {

@@ -20,6 +20,10 @@ export default function Conversation({
   const userId = loginInfo.id;
 
   useEffect(() => {
+    setConversation([]);
+  }, [loginInfo]);
+
+  useEffect(() => {
     if (message === "") {
       (async () => {
         const response = await getMessages(
@@ -30,6 +34,10 @@ export default function Conversation({
       })();
     }
   }, [message]);
+
+  if (!conversation) {
+    return null;
+  }
 
   return (
     <div className="conversation">

@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "./userInfo";
-import ErrorMessage from "./partials/ErrorMessage";
-import SidebarMenu from "./partials/SidebarMenu";
-import NewFriend from "./NewFriend";
 import Conversation from "./partials/Conversation";
+import DeleteAccount from "./DeleteAccount";
+import ErrorMessage from "./partials/ErrorMessage";
+import NewFriend from "./NewFriend";
+import SidebarMenu from "./partials/SidebarMenu";
 
 function SidebarButton({ setDisplaySidebar }) {
   return (
@@ -23,6 +24,7 @@ export default function MainBody({ loginInfo }) {
   const { addingFriend, setAddingFriend } = useContext(Context);
   const [alwaysShowSidebar, setAlwaysShowSidebar] = useState(false);
   const [conversationToDisplay, setConversationToDisplay] = useState(null);
+  const { deletingAccount, setDeletingAccount } = useContext(Context);
   const [displaySidebar, setDisplaySidebar] = useState(false);
   const [error, setError] = useState(null);
 
@@ -48,11 +50,17 @@ export default function MainBody({ loginInfo }) {
     }
   }, [alwaysShowSidebar]);
 
-  // Things to be done upon page load
+  // things to be done upon page load
   useEffect(() => {
     checkWindowSize();
     setError(null);
   }, []);
+
+  // reset page display items after user logs in or out
+  useEffect(() => {
+    setAddingFriend(false);
+    setDeletingAccount(false);
+  }, [loginInfo]);
 
   // don't display MainBody if there's not a logged in user
   if (!loginInfo.token) {
@@ -65,6 +73,7 @@ export default function MainBody({ loginInfo }) {
         <SidebarMenu
           loginInfo={loginInfo}
           alwaysShowSidebar={alwaysShowSidebar}
+          setAlwaysShowSidebar={setAlwaysShowSidebar}
           setConversationToDisplay={setConversationToDisplay}
           setDisplaySidebar={setDisplaySidebar}
         />
@@ -85,6 +94,8 @@ export default function MainBody({ loginInfo }) {
             setAddingFriend={setAddingFriend}
             setError={setError}
           />
+        ) : deletingAccount ? (
+          <DeleteAccount />
         ) : conversationToDisplay ? (
           <Conversation
             conversationToDisplay={conversationToDisplay}

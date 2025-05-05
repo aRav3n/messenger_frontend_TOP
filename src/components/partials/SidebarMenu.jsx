@@ -8,8 +8,10 @@ import {
 import { Context } from "../userInfo";
 
 function FriendListDisplay({
+  alwaysShowSidebar,
   setConversationToDisplay,
   displayFriends,
+  setDisplaySidebar,
   friendsList,
   setAddingFriend,
 }) {
@@ -24,6 +26,9 @@ function FriendListDisplay({
         className="listDisplay"
         onClick={() => {
           setAddingFriend(true);
+          if (!alwaysShowSidebar) {
+            setDisplaySidebar(false);
+          }
         }}
       >
         <img src="./user-plus.svg" alt="" />
@@ -37,6 +42,9 @@ function FriendListDisplay({
             className="listDisplay"
             onClick={() => {
               setConversationToDisplay(friend);
+              if (!alwaysShowSidebar) {
+                setDisplaySidebar(false);
+              }
               setAddingFriend(false);
             }}
           >
@@ -99,8 +107,10 @@ export default function SidebarMenu({
         Friends
       </button>
       <FriendListDisplay
+        alwaysShowSidebar={alwaysShowSidebar}
         setConversationToDisplay={setConversationToDisplay}
         displayFriends={displayFriends}
+        setDisplaySidebar={setDisplaySidebar}
         friendsList={friendsList}
         setAddingFriend={setAddingFriend}
       />
