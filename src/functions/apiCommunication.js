@@ -1,5 +1,5 @@
 async function getJsonResponse(urlExtension, method, bodyObject, token) {
-  const apiUrl = "http://localhost:3000";
+  const apiUrl = "https://messenger-backend-top.onrender.com";
 
   const url = `${apiUrl}${urlExtension}`;
   const fetchObject = {
